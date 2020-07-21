@@ -10,49 +10,70 @@ import static org.junit.Assert.*;
 public class WinTest {
     @Test
     public void whenVerticalWin() {
-        int[][] board = {
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
+        Logic logic = new Logic(5) {
+            @Override
+            public int[][] convert() {
+                return new int[][] {
+                        {0, 0, 1, 0, 0},
+                        {0, 0, 1, 0, 0},
+                        {0, 0, 1, 0, 0},
+                        {0, 0, 1, 0, 0},
+                        {0, 0, 1, 0, 0},
+                };
+            }
         };
-        assertThat(Win.check(board), is(true));
+        assertThat(logic.isWin(), is(true));
     }
 
     @Test
     public void whenHorizontalWin() {
-        int[][] board = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
+        Logic logic = new Logic(5) {
+            @Override
+            public int[][] convert() {
+                return new int[][] {
+                        {0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0},
+                        {1, 1, 1, 1, 1},
+                        {0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0},
+                };
+            }
         };
-        assertThat(Win.check(board), is(true));
+        assertThat(logic.isWin(), is(true));
     }
 
     @Test
     public void whenNotWin() {
-        int[][] board = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
+        Logic logic = new Logic(5) {
+            @Override
+            public int[][] convert() {
+                return new int[][] {
+                        {0, 0, 1, 0, 0},
+                        {0, 0, 1, 0, 0},
+                        {1, 1, 0, 1, 1},
+                        {0, 0, 1, 0, 0},
+                        {0, 0, 1, 0, 0},
+                };
+            }
         };
-        assertThat(Win.check(board), is(false));
+        assertThat(logic.isWin(), is(false));
     }
 
     @Test
     public void whenNotWinL() {
-        int[][] board = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 0},
-                {1, 1, 1, 1, 0},
+        Logic logic = new Logic(5) {
+            @Override
+            public int[][] convert() {
+                return new int[][] {
+                        {0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0},
+                        {0, 0, 0, 1, 0},
+                        {1, 1, 1, 1, 0},
+                };
+            }
         };
-        assertThat(Win.check(board), is(false));
+        assertThat(logic.isWin(), is(false));
     }
+
 }
