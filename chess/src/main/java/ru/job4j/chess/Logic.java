@@ -31,6 +31,13 @@ public class Logic {
     }
 
     private boolean isFree(Cell[] steps) {
+        for (Figure figure : figures) {
+            for (Cell cell : steps) {
+                if (figure != null && figure.position().getX() == cell.getX() && figure.position().getY() == cell.getY()) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 

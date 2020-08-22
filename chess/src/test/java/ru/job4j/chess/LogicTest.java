@@ -1,18 +1,37 @@
 package ru.job4j.chess;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.BishopBlack;
+import ru.job4j.chess.firuges.black.PawnBlack;
 
 public class LogicTest {
 
-    @Ignore
     @Test
-    public void move()
-            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+    public void move() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
         logic.add(new BishopBlack(Cell.C1));
         logic.move(Cell.C1, Cell.H6);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testImpossibleMove() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C3));
+        logic.move(Cell.C3, Cell.C5);
+    }
+
+    @Test(expected = OccupiedCellException.class)
+    public void testOccupiedCellMove() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C3));
+        logic.add(new PawnBlack(Cell.D4));
+        logic.move(Cell.C3, Cell.E5);
+    }
+
+    @Test(expected = FigureNotFoundException.class)
+    public void testFigureNotFoundMove() throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        Logic logic = new Logic();
+        logic.move(Cell.E1, Cell.A4);
     }
 }
